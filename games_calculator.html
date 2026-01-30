@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+body {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  min-height:100vh;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  font-family: Arial, sans-serif;
+  margin:0;
+  color:white;
+}
+
+nav {
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-bottom:20px;
+}
+
+nav a {
+  color: cyan;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* Calculator 3D styles */
+.calculator {
+  background:#333;
+  padding:20px;
+  border-radius:20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 0 20px #00ffff33;
+}
+
+#display {
+  width:320px;
+  height:60px;
+  background:#111;
+  color:#0f0;
+  font-size:2rem;
+  text-align:right;
+  padding:10px;
+  border-radius:10px;
+  box-shadow: inset 0 -5px 10px rgba(0,0,0,0.7);
+  margin-bottom:15px;
+  overflow-x:auto;
+}
+
+.buttons {
+  display:grid;
+  grid-template-columns: repeat(6, 60px);
+  grid-gap:10px;
+}
+
+button {
+  padding:15px;
+  font-size:1rem;
+  border:none;
+  border-radius:10px;
+  background:#555;
+  color:white;
+  box-shadow: 0 5px #222;
+  cursor:pointer;
+  transition: all 0.1s ease;
+}
+
+button:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px #222;
+}
+
+button.operator { background:#f39c12; }
+button.scientific { background:#2980b9; }
+button.equal { background:#27ae60; grid-column: span 2; }
+button.clear { background:#c0392b; grid-column: span 2; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html">Home</a>
+  <a href="snake.html">Snake</a>
+  <a href="car.html">Car</a>
+</nav>
+
+<div class="calculator">
+  <div id="display">0</div>
+  <div class="buttons">
+      <button class="clear">C</button>
+      <button class="scientific">sin</button>
+      <button class="scientific">cos</button>
+      <button class="scientific">tan</button>
+      <button class="scientific">√</button>
+      <button class="operator">/</button>
+
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button class="operator">*</button>
+      <button class="scientific">log</button>
+      <button class="scientific">^</button>
+
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button class="operator">-</button>
+      <button class="scientific">π</button>
+      <button class="scientific">e</button>
+
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button class="operator">+</button>
+      <button>(</button>
+      <button>)</button>
+
+      <button>0</button>
+      <button>.</button>
+      <button class="equal">=</button>
+  </div>
+</div>
+
+<script>
+const display = document.getElementById('display');
+let current = '';
+
+function updateDisplay(){
+    display.textContent = current || '0';
+}
+
+function calculate(expression){
+    try{
+        expression = expression
+            .replace(/π/g, Math.PI)
+            .replace(/e/g, Math.E)
+            .replace(/sin/g, 'Math.sin')
+            .replace(/cos/g, 'Math.cos')
+            .replace(/tan/g, 'Math.tan')
+            .replace(/log/g, 'Math.log10')
+            .replace(/√/g, 'Math.sqrt')
+            .replace(/\^/g, '**');
+        return eval(expression);
+    } catch {
+        return 'Error';
+    }
+}
+
+document.querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        const val = btn.textContent;
+
+        if(btn.classList.contains('clear')){
+            current = '';
+        } else if(btn.classList.contains('equal')){
+            current = calculate(current).toString();
+        } else {
+            current += val;
+        }
+
+        updateDisplay();
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2D Car Game</title>
+<style>
+body {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin:0;
+  height:100vh;
+  background:#111;
+  font-family:Arial, sans-serif;
+  color:white;
+}
+canvas {
+  background:#222;
+  display:block;
+  margin:20px 0;
+  border: 2px solid cyan;
+}
+button {
+  padding:10px 20px;
+  margin:5px;
+  border:none;
+  border-radius:10px;
+  background:cyan;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+}
+.controls {
+  display:flex;
+  justify-content:center;
+  margin-top:10px;
+}
+</style>
+</head>
+<body>
+
+<h1>2D Car Game</h1>
+<canvas id="carCanvas" width="400" height="600"></canvas>
+
+<div class="controls">
+  <button onclick="moveLeft()">⬅</button>
+  <button onclick="moveRight()">➡</button>
+</div>
+
+<button onclick="restartGame()">Restart</button>
+
+<!-- Link external JavaScript -->
+<script src="car.js"></script>
+</body>
+</html>
