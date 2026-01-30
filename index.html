@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justine Ilagan</title>
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:#00ffff;
+  min-height:100vh;
+  overflow-x:hidden;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* NAVIGATION */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:rgba(0,0,0,0.6);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+nav a{
+  color:inherit;
+  text-decoration:none;
+  margin-left:15px;
+  font-weight:bold;
+  transition:0.3s;
+}
+nav a:hover{color:#ff69b4;}
+nav a img{
+  width:24px;
+  height:24px;
+  vertical-align:middle;
+  transition: transform 0.3s, filter 0.3s;
+}
+nav a img:hover{
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 5px #ff69b4);
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:100px 20px 50px 20px;
+}
+.hero h1{
+  font-size:3em;
+  text-shadow:0 0 20px currentColor;
+  transition:text-shadow 0.5s;
+}
+.hero p{
+  font-size:1.2em;
+  margin-top:10px;
+}
+
+/* GAME CARDS */
+#games{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:30px;
+  padding:60px 20px;
+}
+.game-card{
+  width:220px;
+  height:220px;
+  background:rgba(255,192,203,0.08);
+  border:1px solid currentColor;
+  border-radius:20px;
+  box-shadow:0 0 30px currentColor inset,0 0 15px currentColor;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:0.3s, box-shadow 0.2s, transform 0.2s;
+  position:relative;
+  overflow:hidden;
+  color:#ff69b4;
+}
+.game-card:hover{
+  transform:scale(1.1) rotateY(10deg);
+  box-shadow:0 0 50px currentColor,0 0 30px currentColor inset;
+}
+.game-card:active{
+  transform:scale(1.15) rotateY(15deg);
+  box-shadow:0 0 70px currentColor,0 0 50px currentColor inset;
+}
+.game-card::before,
+.game-card::after{
+  content:"";
+  position:absolute;
+  width:200%;
+  height:2px;
+  background: linear-gradient(90deg,transparent,currentColor,transparent);
+  animation: animate-line 2s linear infinite;
+}
+.game-card::after{ transform: rotate(90deg); }
+@keyframes animate-line{ 0% {transform:translateX(-100%);} 100% {transform:translateX(100%);} }
+.game-card h3{ margin:0; font-size:1.5em; text-shadow:0 0 10px currentColor; }
+.game-card p{ margin-top:10px; text-align:center; }
+
+/* CHANGE THEME BUTTON */
+#themeBtn{
+  display:block;
+  margin:40px auto;
+  padding:12px 25px;
+  border:none;
+  border-radius:12px;
+  background:#ff69b4;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+#themeBtn:hover{
+  transform:scale(1.1);
+  background:#ff85c1;
+}
+
+/* CONTACT BUTTON */
+#contact-btn{
+  display:block;
+  margin:20px auto;
+  padding:10px 20px;
+  border:none;
+  border-radius:10px;
+  background:#ff69b4;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+#contact-btn:hover{
+  transform:scale(1.1);
+  background:#ff85c1;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  background: rgba(0,0,0,0.4);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <strong>Justine Ilagan</strong>
+  <div>
+    <a href="about.html">About</a>
+    <a href="projects.html">Games</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://github.com/justineilagan003" target="_blank" title="GitHub">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub">
+    </a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Welcome to My WebPage🎮</h1>
+  <p>Thank You For Visiting My First WebPage</p>
+</section>
+
+<section id="games">
+  <div class="game-card" data-link="games/calculator.html">
+    <h3>Calculator</h3>
+    <p>Calculator</p>
+  </div>
+  <div class="game-card" data-link="games/snake.html">
+    <h3>Snake Game</h3>
+    <p>Classic Snake Adventure</p>
+  </div>
+  <div class="game-card" data-link="games/car.html">
+    <h3>Car Game</h3>
+    <p>Car Racing Experience</p>
+  </div>
+</section>
+
+<!-- THEME BUTTON -->
+<button id="themeBtn">Change Theme</button>
+
+<!-- CONTACT BUTTON -->
+<button id="contact-btn" onclick="window.location.href='contact.html'">Go to Contact</button>
+
+<footer>
+  © 2026 Justine Ilagan
+</footer>
+
+<script>
+// Open game pages on click
+document.querySelectorAll('.game-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    window.location.href=card.getAttribute('data-link');
+  });
+});
+
+// Theme toggle
+const themeBtn=document.getElementById('themeBtn');
+let isPink=true;
+themeBtn.addEventListener('click',()=>{
+  if(isPink){
+    document.body.style.background='linear-gradient(135deg,#2c003e,#5f007f,#a200ff)';
+    document.body.style.color='#ff69b4';
+    document.querySelectorAll('.game-card').forEach(c=>c.style.color='#ff69b4');
+  }else{
+    document.body.style.background='linear-gradient(135deg,#0f2027,#203a43,#2c5364)';
+    document.body.style.color='#00ffff';
+    document.querySelectorAll('.game-card').forEach(c=>c.style.color='#00ffff');
+  }
+  isPink=!isPink;
+});
+</script>
+
+</body>
+</html>
